@@ -1,0 +1,6 @@
+---
+
+alerta_depend_pkgs:
+  - python36-pip
+  - python36-devel
+  - gcc

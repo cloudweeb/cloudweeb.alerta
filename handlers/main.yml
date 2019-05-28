@@ -1,0 +1,7 @@
+---
+
+- name: restart alerta
+  systemd:
+    name: alerta
+    state: restarted
+    daemon_reload: true

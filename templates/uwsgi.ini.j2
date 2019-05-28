@@ -1,0 +1,17 @@
+[uwsgi]
+chdir = {{ alerta_base_dir }}
+mount = {{ alerta_base_url }}=wsgi.py
+callable = app
+manage-script-name = true
+
+master = true
+processes = 5
+logger = syslog:alertad
+
+socket = {{ alerta_socket_path }}
+chmod-socket = 664
+uid = {{ alerta_web_user }}
+gid = {{ alerta_web_group }}
+vacuum = true
+
+die-on-term = true

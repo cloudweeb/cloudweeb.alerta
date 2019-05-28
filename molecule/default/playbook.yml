@@ -1,0 +1,34 @@
+---
+
+- name: Converge
+  hosts: all
+
+  vars:
+
+    nginx_remove_default_vhost: true
+
+    nginx_vhosts:
+      - listen: "80"
+        server_name: "alerta.cloudweeb.com"
+        extra_parameters: |
+          location /api { try_files $uri @api; }
+          location @api {
+              include uwsgi_params;
+              uwsgi_pass unix:/tmp/uwsgi.sock;
+              proxy_set_header Host $host:$server_port;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          }
+
+          location / {
+              root /opt/alerta/app;
+              try_files $uri $uri/ /index.html;
+          }
+
+  roles:
+
+    - role: cloudweeb.mongodb
+
+    - role: geerlingguy.nginx
+
+    - role: cloudweeb.alerta

@@ -1,0 +1,22 @@
+---
+
+alerta_base_dir: /opt/alerta
+alerta_web_ui_dir: /opt/alerta/app
+alerta_socket_path: /tmp/uwsgi.sock
+
+alerta_base_url: /api
+
+alerta_web_user: nginx
+alerta_web_group: '{{ alerta_web_user }}'
+
+alerta_enable_plugins: []
+# - prometheus
+# - customtimeout
+
+alerta_auth_required: false
+
+alerta_admin_users: []
+# - admin@example.com
+
+alerta_allowed_email_domains: []
+# - example.com
