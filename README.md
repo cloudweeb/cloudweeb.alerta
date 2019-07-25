@@ -1,6 +1,8 @@
 Cloudweeb Alerta
 =========
 
+[![Build Status](https://travis-ci.com/cloudweeb/cloudweeb.alerta.svg?branch=master)](https://travis-ci.com/cloudweeb/cloudweeb.alerta)
+
 Ansible role to install Alerta
 
 Requirements
