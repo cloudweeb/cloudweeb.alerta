@@ -12,7 +12,7 @@
 - name: Fail if alerta secretkey not defined
   fail:
     msg: alerta_secretkey must be defined if you enable alerta authentification
-  when: alerta_auth_required | bool and alerta_secretkey == ''
+  when: alerta_auth_required | bool and not alerta_secretkey
 
 - name: Define alerta_pip_packages
   set_fact:
