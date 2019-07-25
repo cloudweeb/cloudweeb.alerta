@@ -6,6 +6,16 @@ alerta_socket_path: /tmp/uwsgi.sock
 
 alerta_base_url: /api
 
+alerta_pip_base_packages:
+  - alerta
+  - alerta-server
+
+alerta_pip_depend_packages:
+  - uwsgi
+
+alerta_pip_plugins_packages: []
+
+alerta_web_console_version: 7.3.1
 alerta_web_user: nginx
 alerta_web_group: '{{ alerta_web_user }}'
 
@@ -14,9 +24,22 @@ alerta_enable_plugins: []
 # - customtimeout
 
 alerta_auth_required: false
+alerta_secretkey: ''
 
 alerta_admin_users: []
 # - admin@example.com
 
 alerta_allowed_email_domains: []
 # - example.com
+
+alerta_extra_conf_options: ''
+alerta_severity_options: |
+  SEVERITY_MAP = {
+      'critical': 1,
+      'warning': 4,
+      'indeterminate': 5,
+      'ok': 5,
+      'unknown': 9
+  }
+  DEFAULT_NORMAL_SEVERITY = 'ok'
+  DEFAULT_PREVIOUS_SEVERITY = 'indeterminate'

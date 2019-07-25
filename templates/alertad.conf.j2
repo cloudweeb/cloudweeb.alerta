@@ -1,28 +1,22 @@
-SEVERITY_MAP = {
-    'fatal': 0,
-    'critical': 1,
-    'warning': 4,
-    'indeterminate': 5,
-    'ok': 5,
-    'unknown': 9
-}
-
 BASE_URL = '{{ alerta_base_url }}'
 
 {% if alerta_enable_plugins is defined and alerta_enable_plugins | length %}
 PLUGINS = {{ alerta_enable_plugins }}
 {% endif %}
-CUSTOM_TIMEOUT = 21600
-ALERTMANAGER_SILENCE_DAYS = 1
 
 LOG_FILE = '/var/log/alerta.log'
 
+{% if alerta_auth_required | bool %}
 AUTH_REQUIRED = {{ alerta_auth_required }}
-{% if alerta_admin_users is defined and alerta_admin_users | length %}
+SECRET_KEY = '{{ alerta_secretkey }}'
+{%  if alerta_admin_users is defined and alerta_admin_users | length %}
 ADMIN_USERS = {{ alerta_admin_users }}
-{% endif %}
-{% if alerta_allowed_email_domains is defined and alerta_allowed_email_domains | length %}
+{%  endif %}
+{%  if alerta_allowed_email_domains is defined and alerta_allowed_email_domains | length %}
 ALLOWED_EMAIL_DOMAINS = {{ alerta_allowed_email_domains }}
+{%  endif %}
 {% endif %}
 
-SECRET_KEY = '{{ alerta_secretkey }}'
+{{ alerta_severity_options }}
+
+{{ alerta_extra_conf_options }}

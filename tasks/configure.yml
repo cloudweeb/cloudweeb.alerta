@@ -1,0 +1,23 @@
+---
+
+- name: Create a wsgi python file
+  copy:
+    content: from alerta import app
+    dest: '{{ alerta_base_dir }}/wsgi.py'
+
+- name: Create uWsgi configuration file
+  template:
+    src: uwsgi.ini.j2
+    dest: /etc/uwsgi.ini
+
+- name: Configure alertad.conf
+  template:
+    src: alertad.conf.j2
+    dest: /etc/alertad.conf
+  notify: restart alerta
+
+- name: Create a systemd configuration file for the alerta
+  copy:
+    src: alerta.service
+    dest: /etc/systemd/system/alerta.service
+  notify: restart alerta
