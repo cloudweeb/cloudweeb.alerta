@@ -9,11 +9,22 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
 
-- name: Define alerta_secretkey
+- name: Fail if alerta secretkey not defined
+  fail:
+    msg: alerta_secretkey must be defined if you enable alerta authentification
+  when: alerta_auth_required | bool and alerta_secretkey == ''
+
+- name: Define alerta_pip_packages
   set_fact:
-    alerta_secretkey: '{{ lookup("password", "/tmp/alerta_secretkey length=32") }}'
+    alerta_pip_packages: '{{ alerta_pip_base_packages +
+                             alerta_pip_depend_packages +
+                             alerta_pip_plugins_packages }}'
 
 - import_tasks: install.yml
+
+- import_tasks: configure.yml
+
+- import_tasks: web-console.yml
 
 - name: Start & enable Alerta
   systemd:

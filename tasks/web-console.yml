@@ -1,0 +1,21 @@
+- name: Create alerta web console directory
+  file:
+    path: '{{ alerta_web_ui_dir }}'
+    state: directory
+
+- name: Get web console archive
+  get_url:
+    url: 'https://github.com/alerta/alerta-webui/releases/download/v{{ alerta_web_console_version }}/alerta-webui.tar.gz'
+    dest: /tmp/alerta-webui.tar.gz
+
+- name: Extract alerta web console
+  unarchive:
+    src: /tmp/alerta-webui.tar.gz
+    dest: '{{ alerta_web_ui_dir }}'
+    remote_src: true
+    extra_opts: ['--strip-components=1']
+
+- name: Configure alerta web console
+  template:
+    src: config.json.j2
+    dest: '{{ alerta_web_ui_dir }}/config.json'
