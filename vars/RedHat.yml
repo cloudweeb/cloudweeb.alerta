@@ -1,6 +1,7 @@
 ---
 
 alerta_depend_pkgs:
+  - gcc
   - python36-pip
   - python36-devel
-  - gcc
+  - python-setuptools
