@@ -1,5 +1,8 @@
 ---
 
+alerta_web_user: www-data
+alerta_web_group: '{{ alerta_web_user }}'
+
 alerta_depend_pkgs:
   - build-essential
   - python3-pip

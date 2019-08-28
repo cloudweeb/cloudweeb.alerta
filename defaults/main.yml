@@ -16,8 +16,6 @@ alerta_pip_depend_packages:
 alerta_pip_plugins_packages: []
 
 alerta_web_console_version: 7.3.1
-alerta_web_user: nginx
-alerta_web_group: '{{ alerta_web_user }}'
 
 alerta_enable_plugins: []
 # - prometheus
