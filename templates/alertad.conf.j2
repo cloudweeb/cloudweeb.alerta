@@ -1,3 +1,5 @@
+{{ ansible_managed | comment }}
+
 BASE_URL = '{{ alerta_base_url }}'
 
 {% if alerta_enable_plugins is defined and alerta_enable_plugins | length %}
